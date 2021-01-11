@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Posts from "../containers/Posts";
+import Form from "../containers/Form";
 import { useDispatch } from "react-redux";
 import { fetchPosts } from "tut-redux/slices/postsSlice";
 
@@ -14,6 +15,7 @@ export default function Home() {
     <div>
       home page hello
       <Posts />
+      <Form />
     </div>
   );
 }

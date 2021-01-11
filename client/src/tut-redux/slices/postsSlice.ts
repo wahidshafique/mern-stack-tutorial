@@ -27,6 +27,7 @@ const postsSlice = createSlice({
       state.error = "ahh";
     });
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
+      console.log("yay ", action.payload);
       state.data = action.payload;
     });
   },
