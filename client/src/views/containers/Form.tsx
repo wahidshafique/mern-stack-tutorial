@@ -1,51 +1,55 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Post } from "../../../../shared/types";
 //@ts-ignore
 import FileBase from "react-file-base64";
 import { useForm } from "react-hook-form";
+import { createPost } from "tut-redux/slices/postsSlice";
 
-enum inputNames {
-  creator = "creator",
-  title = "title",
-  message = "message",
-  tags = "tags",
+enum InputNames {
+  Creator = "creator",
+  Title = "title",
+  Message = "message",
+  Tags = "tags",
 }
 
 export default function Form() {
+  const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data: unknown) => {
-    console.log(data);
+  const onSubmit = (data: Post) => {
+    console.log("formData", data);
+    dispatch(createPost(data));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <p>{inputNames.creator}</p>
+        <p>{InputNames.Creator}</p>
         <input
-          name={inputNames.creator}
+          name={InputNames.Creator}
           type="text"
           ref={register({ required: true })}
         />
       </div>
       <div>
-        <p>{inputNames.title}</p>
+        <p>{InputNames.Title}</p>
         <input
-          name={inputNames.title}
+          name={InputNames.Title}
           type="text"
           ref={register({ required: true })}
         />
       </div>
       <div>
-        <p>{inputNames.message}</p>
+        <p>{InputNames.Message}</p>
         <input
-          name={inputNames.message}
+          name={InputNames.Message}
           type="text"
           ref={register({ required: true })}
         />
       </div>
       <div>
-        <p>{inputNames.tags}</p>
+        <p>{InputNames.Tags}</p>
         <input
-          name={inputNames.tags}
+          name={InputNames.Tags}
           type="text"
           ref={register({ required: true })}
         />

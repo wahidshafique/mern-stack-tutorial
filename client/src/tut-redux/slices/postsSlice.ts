@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Post } from "../../../../shared/types";
 import * as api from "api";
 
 interface PostsState {
@@ -6,16 +7,26 @@ interface PostsState {
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
 }
-const initialState = {
+const initialState: PostsState = {
   data: [],
   loading: "idle",
   error: "",
-} as PostsState;
+};
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await api.fetchPosts();
   return response.data;
 });
+
+export const createPost = createAsyncThunk(
+  "posts/createPost",
+  async (post: Post) => {
+    console.log("thunk create post data", post);
+    const response = await api.createPost(post);
+    console.log("response", response);
+    return response.data;
+  }
+);
 
 const postsSlice = createSlice({
   name: "posts",
@@ -29,6 +40,9 @@ const postsSlice = createSlice({
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
       console.log("yay ", action.payload);
       state.data = action.payload;
+    });
+    builder.addCase(createPost.fulfilled, (state, action) => {
+      state.data.push(action.payload);
     });
   },
 });

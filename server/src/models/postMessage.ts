@@ -1,15 +1,7 @@
 import mongoose, { Schema } from "mongoose";
+import { Post as _Post } from "../../../shared/types";
 
-export interface Post extends mongoose.Document {
-  title: string;
-  message: string;
-  creator: string;
-  tags: string[];
-  selectedFile: string;
-  likeCount: {
-    type: number;
-  };
-}
+export interface Post extends mongoose.Document, _Post {}
 
 const postSchema: Schema = new mongoose.Schema({
   title: String,

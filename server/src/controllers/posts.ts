@@ -18,6 +18,7 @@ export const createPost = async (
 ): Promise<void> => {
   const post = req?.body as unknown;
   const newPost = new PostMessage(post);
+  console.log("new post server", req.body);
   try {
     await newPost.save();
     res.status(201).json(newPost);
