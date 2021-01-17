@@ -3,7 +3,7 @@ import { Post } from "../../../../shared/types";
 import * as api from "api";
 
 interface PostsState {
-  data: string[];
+  data: Post[];
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
 }
@@ -21,9 +21,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 export const createPost = createAsyncThunk(
   "posts/createPost",
   async (post: Post) => {
-    console.log("thunk create post data", post);
     const response = await api.createPost(post);
-    console.log("response", response);
     return response.data;
   }
 );
@@ -34,12 +32,14 @@ const postsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPosts.rejected, (state, action) => {
-      console.log("STOP", state, action);
-      state.error = "ahh";
+      state.error = "Error while fetching posts";
+    });
+    builder.addCase(fetchPosts.pending, (state, action) => {
+      state.loading = "pending";
     });
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      console.log("yay ", action.payload);
       state.data = action.payload;
+      state.loading = "succeeded";
     });
     builder.addCase(createPost.fulfilled, (state, action) => {
       state.data.push(action.payload);

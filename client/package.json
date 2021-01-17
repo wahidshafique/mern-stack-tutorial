@@ -12,6 +12,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "autoprefixer": "^10.2.1",
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -21,6 +22,7 @@
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
@@ -49,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-redux": "^7.1.15"
+    "@types/react-redux": "^7.1.15",
+    "tailwind.macro": "^1.0.0-alpha.10"
   }
 }
