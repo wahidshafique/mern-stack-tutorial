@@ -2,11 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 import postRoutes from "./routes/posts";
 
-const CONNECTION_URL =
-  "mongodb+srv://admin:x9J0ZJujnZPGjdKT@cluster0.f9ywk.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const PORT = process.env.PORT || 5000;
 const app = express();
