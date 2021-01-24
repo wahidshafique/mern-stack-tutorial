@@ -5,8 +5,8 @@ import Post from "../components/Post";
 import tw from "tailwind.macro";
 import styled from "styled-components/macro";
 
-const Header = styled.header`
-  ${tw`bg-black min-h-screen flex flex-col items-center justify-center text-xl text-white`};
+const PostsList = styled.div`
+  ${tw`flex flex-wrap mx-auto`};
 `;
 
 export default function Posts() {
@@ -17,11 +17,10 @@ export default function Posts() {
   }
 
   return (
-    <div>
-      <Header>yuo</Header>
+    <PostsList>
       {posts.data.map((post) => (
-        <Post key={post.id} {...post} />
+        <Post key={post?._id} {...post} />
       ))}
-    </div>
+    </PostsList>
   );
 }

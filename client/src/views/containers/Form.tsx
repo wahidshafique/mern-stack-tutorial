@@ -11,11 +11,13 @@ enum InputNames {
   Title = "title",
   Message = "message",
   Tags = "tags",
+  Image = "image",
 }
 
 export default function Form() {
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm();
+  register(InputNames.Image);
   const onSubmit = (data: Post) => {
     console.log("formData", data);
     dispatch(createPost(data));
@@ -54,7 +56,13 @@ export default function Form() {
           ref={register({ required: true })}
         />
       </div>
-      <FileBase type="file" multiple={false} onDone={(res: unknown) => {}} />
+      <FileBase
+        type="file"
+        multiple={false}
+        onDone={(res: unknown) => {
+          setValue(InputNames.Image, res);
+        }}
+      />
       <button type="submit">submit</button>
       <button onClick={reset}>clear</button>
     </form>
